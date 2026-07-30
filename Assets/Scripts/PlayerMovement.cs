@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame) // move the player left
+        if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.fKey.wasPressedThisFrame) // move the player left
         {
             myTransform.position = allSlots[mySlot - 1].position;
             mySlot--;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.dKey.wasPressedThisFrame)
+        if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.jKey.wasPressedThisFrame)
         {
             myTransform.position = allSlots[mySlot + 1].position;
             mySlot++;
