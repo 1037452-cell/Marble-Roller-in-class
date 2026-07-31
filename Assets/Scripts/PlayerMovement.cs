@@ -15,7 +15,12 @@ public class PlayerMovement : MonoBehaviour
 
     // Player Position
     public Transform myTransform;
-    public int mySlot; 
+    public int mySlot;
+
+    // Trigger Type
+    public bool isGreen;
+    public bool isYellow;
+    public bool isRed;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,9 +60,14 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Postion " + mySlot);
             }
 
+
         }
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Hit! " + collision.gameObject.name);
+    }
 
 
 }

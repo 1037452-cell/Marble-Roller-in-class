@@ -1,15 +1,19 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gates : MonoBehaviour
 {
-    // Reference of moving plane
-    public PlaneMovement Plane;
+    // Reference of player
+    public PlayerMovement player;
 
-    // Green Gates
-    public Transform GreenGate1;
-    public Transform GreenGate2;
-    public Transform GreenGate3;
-    public Transform GreenGate4;
+    // Reference of moving plane
+    public PlaneMovement plane;
+
+    // Green Gates Position
+    public Transform greenGate1;
+    public Transform greenGate2;
+    public Transform greenGate3;
+    public Transform greenGate4;
 
     // Green Colliders 
     public BoxCollider g1;
@@ -31,9 +35,12 @@ public class Gates : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
-
+    public void OnCollisionEnter(Collision collision)
+    {
+    Debug.Log("Hit! " + collision.gameObject.name);
+    }
 
 }
