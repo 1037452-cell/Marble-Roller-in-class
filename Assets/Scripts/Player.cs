@@ -29,13 +29,14 @@ public class Player : MonoBehaviour
     public bool isRed = false;
 
     // Gate Reference
+    public Gates gatesSpawned; 
     public GreenGates greenGates;
     public YellowGates yellowGates;
     public RedGates redGates;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         myTransform.position = slotR1.position;
         mySlot = 3;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.fKey.wasPressedThisFrame) // move the player left
         {
@@ -79,20 +80,20 @@ public class Player : MonoBehaviour
     {
         if (isGreen == false && isYellow == false && isRed == false)
         {
-            if (collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
+            if (collision.gameObject.tag == "Green")
             {
                 isGreen = true;
-                Debug.Log("Enter " + collision.gameObject.name);
+                Debug.Log("Triggered " + collision.gameObject.name);
             }
-            else if (collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
+            else  if (collision.gameObject.tag == "Yellow")
             {
                 isYellow = true;
-                Debug.Log("Enter " + collision.gameObject.name);
+                Debug.Log("Triggered " + collision.gameObject.name);
             }
-            else if (collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
+            else if (collision.gameObject.tag == "Red")
             {
                 isRed = true;
-                Debug.Log("Enter " + collision.gameObject.name);
+                Debug.Log("Triggered " + collision.gameObject.name);
             }
         }
 
@@ -119,17 +120,20 @@ public class Player : MonoBehaviour
         if (isGreen == true)
         {
             isGreen = false;
+            gatesSpawned.isGreen = false;
             Debug.Log("Exit " + collision.gameObject.name);
             
         }
         else if (isYellow == true)
         {
             isYellow = false;
+            gatesSpawned.isYellow = false;
             Debug.Log("Exit " + collision.gameObject.name);
         }
         else if (isRed == true)
         {
             isRed= false;
+            gatesSpawned.isRed = false;
             Debug.Log("Exit " + collision.gameObject.name);
         }
     }
