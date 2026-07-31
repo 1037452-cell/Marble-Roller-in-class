@@ -1,7 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     // Rails
     public Transform slotOffL;
@@ -17,10 +19,16 @@ public class PlayerMovement : MonoBehaviour
     public Transform myTransform;
     public int mySlot;
 
+    // Rigid Body
+    public Rigidbody myRigidbody;
+
     // Trigger Type
-    public bool isGreen;
-    public bool isYellow;
-    public bool isRed;
+    public bool isGreen = false;
+    public bool isYellow = false;
+    public bool isRed = false;
+
+    // Gate Reference
+    public GreenGates greenGates;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myTransform.position = slotR1.position;
         mySlot = 3;
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -59,15 +68,16 @@ public class PlayerMovement : MonoBehaviour
                 mySlot = 1;
                 Debug.Log("Postion " + mySlot);
             }
-
-
         }
-    }
 
-    public void OnCollisionEnter(Collision collision)
+}
+
+    private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Hit! " + collision.gameObject.name);
+        Debug.Log("Enter " + collision.gameObject.name);
+        isGreen = true;
     }
 
+    
 
 }

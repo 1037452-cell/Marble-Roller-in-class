@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlaneMovement : MonoBehaviour
 {
     // Reference
-    public Gates gates;
+    public GreenGates gates;
 
 
     // Positions

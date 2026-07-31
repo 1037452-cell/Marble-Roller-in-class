@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87edd38ca3c194689ce88081823398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gates: {fileID: 1101707690}
   myTransform: {fileID: 304483945}
   currentXPosition: 0
   currentYPosition: 0
@@ -556,6 +557,9 @@ MonoBehaviour:
   boostSpeed: 0
   bigBoostSpeed: 0
   slowDown: 0
+  isGreen: 0
+  isYellow: 0
+  isRed: 0
 --- !u!1001 &444742890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +568,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1101707687}
     m_Modifications:
+    - target: {fileID: -5112864718337552439, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2436335703527248536, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -627,7 +635,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 448365155}
-  - component: {fileID: 448365154}
   m_Layer: 0
   m_Name: Gates
   m_TagString: Untagged
@@ -635,29 +642,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &448365154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448365153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 490c12449a25c5b4abd4fe215576dac6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1195858695}
-  plane: {fileID: 304483946}
-  greenGate1: {fileID: 669439173522474722}
-  greenGate2: {fileID: 616436980}
-  greenGate3: {fileID: 806385773}
-  greenGate4: {fileID: 2133641391}
-  g1: {fileID: 3137592471119595437}
-  g2: {fileID: 1435526858}
-  g3: {fileID: 2052008744}
-  g4: {fileID: 444742891}
-  isGreenTriggered: 0
 --- !u!4 &448365155
 Transform:
   m_ObjectHideFlags: 0
@@ -976,6 +960,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101707687}
+  - component: {fileID: 1101707689}
+  - component: {fileID: 1101707690}
   m_Layer: 0
   m_Name: GateGroupGreen
   m_TagString: Untagged
@@ -1002,6 +988,51 @@ Transform:
   - {fileID: 2133641391}
   m_Father: {fileID: 448365155}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1101707689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101707686}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1101707690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101707686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d05b15673ddf5469d682e3f7c6f708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1195858701}
+  plane: {fileID: 304483946}
+  greenGate1: {fileID: 669439173522474722}
+  greenGate2: {fileID: 616436980}
+  greenGate3: {fileID: 806385773}
+  greenGate4: {fileID: 2133641391}
+  g1: {fileID: 3137592471119595437}
+  g2: {fileID: 1435526858}
+  g3: {fileID: 2052008744}
+  g4: {fileID: 444742891}
+  greenCollection: []
+  isGreenTriggered: 0
 --- !u!1001 &1147443492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1133,7 +1164,8 @@ GameObject:
   - component: {fileID: 1195858698}
   - component: {fileID: 1195858697}
   - component: {fileID: 1195858696}
-  - component: {fileID: 1195858695}
+  - component: {fileID: 1195858700}
+  - component: {fileID: 1195858701}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1141,33 +1173,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1195858695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195858694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a182b915456404ab13905ebd6698d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotOffL: {fileID: 42458535}
-  slotL1: {fileID: 9166475279364229515}
-  slotL2: {fileID: 1359192910}
-  slotR1: {fileID: 1165784069}
-  slotR2: {fileID: 175892979}
-  slotOffR: {fileID: 511650598}
-  allSlots:
-  - {fileID: 42458535}
-  - {fileID: 9166475279364229515}
-  - {fileID: 1359192910}
-  - {fileID: 1165784069}
-  - {fileID: 175892979}
-  - {fileID: 511650598}
-  myTransform: {fileID: 1195858699}
-  mySlot: 0
 --- !u!135 &1195858696
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1257,6 +1262,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1195858700
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195858694}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1195858701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195858694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a182b915456404ab13905ebd6698d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotOffL: {fileID: 42458535}
+  slotL1: {fileID: 9166475279364229515}
+  slotL2: {fileID: 1359192910}
+  slotR1: {fileID: 1165784069}
+  slotR2: {fileID: 175892979}
+  slotOffR: {fileID: 511650598}
+  allSlots:
+  - {fileID: 42458535}
+  - {fileID: 9166475279364229515}
+  - {fileID: 1359192910}
+  - {fileID: 1165784069}
+  - {fileID: 175892979}
+  - {fileID: 511650598}
+  myTransform: {fileID: 1195858699}
+  mySlot: 0
+  myRigidbody: {fileID: 1195858700}
+  isGreen: 0
+  isYellow: 0
+  isRed: 0
+  greenGates: {fileID: 1101707690}
 --- !u!4 &1330648172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4689193966510682522, guid: 455d3f0a6b5786d44b72c647ff9d3d08, type: 3}
@@ -1389,6 +1453,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1101707687}
     m_Modifications:
+    - target: {fileID: -5112864718337552439, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2436335703527248536, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1605,6 +1673,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1101707687}
     m_Modifications:
+    - target: {fileID: -5112864718337552439, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5112864718337552439, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2436335703527248536, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1744,6 +1820,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1101707687}
     m_Modifications:
+    - target: {fileID: -5112864718337552439, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2436335703527248536, guid: 1af7ea6e9abb26e4285299b19b6730f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

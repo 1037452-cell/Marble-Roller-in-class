@@ -1,10 +1,11 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Device;
 
-public class Gates : MonoBehaviour
+public class GreenGates : MonoBehaviour
 {
     // Reference of player
-    public PlayerMovement player;
+    public Player player;
 
     // Reference of moving plane
     public PlaneMovement plane;
@@ -20,27 +21,21 @@ public class Gates : MonoBehaviour
     public BoxCollider g2;
     public BoxCollider g3;
     public BoxCollider g4;
+    public BoxCollider[] greenCollection;
 
     // Trigger Checks
     public bool isGreenTriggered;
 
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        greenCollection = new[] {g1, g2, g3, g4};
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-    }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-    Debug.Log("Hit! " + collision.gameObject.name);
     }
 
 }
