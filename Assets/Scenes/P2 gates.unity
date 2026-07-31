@@ -639,6 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 448365155}
+  - component: {fileID: 448365156}
   m_Layer: 0
   m_Name: Gates
   m_TagString: Untagged
@@ -664,6 +665,34 @@ Transform:
   - {fileID: 583491509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &448365156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448365153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216df31a59179f9478fafae3740512a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1195858701}
+  plane: {fileID: 304483946}
+  myTransform: {fileID: 448365155}
+  currentXPosition: 0
+  currentYPosition: 0
+  currentZPosition: 0
+  startSpeed: 0
+  boostSpeed: 0
+  bigBoostSpeed: 0
+  slowDown: 0
+  green: {fileID: 1101707690}
+  yellow: {fileID: 1693320459}
+  red: {fileID: 583491510}
+  isGreen: 0
+  isYellow: 0
+  isRed: 0
 --- !u!4 &511650598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8227543984515151807, guid: dfc724a167941194eb30268607d46f34, type: 3}
