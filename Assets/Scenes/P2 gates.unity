@@ -553,7 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87edd38ca3c194689ce88081823398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gates: {fileID: 1101707690}
   myTransform: {fileID: 304483945}
   currentXPosition: 0
   currentYPosition: 0

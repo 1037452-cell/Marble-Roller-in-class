@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GreenGates : MonoBehaviour
+public class YellowGates : MonoBehaviour
 {
     // Reference of player
     public Player player;
@@ -9,16 +9,16 @@ public class GreenGates : MonoBehaviour
     public PlaneMovement plane;
 
     // Green Gates Position
-    public Transform greenGate1;
-    public Transform greenGate2;
-    public Transform greenGate3;
-    public Transform greenGate4;
+    public Transform yellowGate1;
+    public Transform yellowGate2;
+    public Transform yellowGate3;
+    public Transform yellowGate4;
 
     // Green Colliders 
-    public BoxCollider g1;
-    public BoxCollider g2;
-    public BoxCollider g3;
-    public BoxCollider g4;
+    public BoxCollider y1;
+    public BoxCollider y2;
+    public BoxCollider y3;
+    public BoxCollider y4;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,4 +31,5 @@ public class GreenGates : MonoBehaviour
     {
 
     }
+
 }

@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class Player : MonoBehaviour
 
     // Gate Reference
     public GreenGates greenGates;
+    public YellowGates yellowGates;
+    public RedGates redGates;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,10 +77,60 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Enter " + collision.gameObject.name);
-        isGreen = true;
+        if (isGreen == false && isYellow == false && isRed == false)
+        {
+            if (collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
+            {
+                isGreen = true;
+                Debug.Log("Enter " + collision.gameObject.name);
+            }
+            else if (collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
+            {
+                isYellow = true;
+                Debug.Log("Enter " + collision.gameObject.name);
+            }
+            else if (collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
+            {
+                isRed = true;
+                Debug.Log("Enter " + collision.gameObject.name);
+            }
+        }
+
+
+        //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
+        //{
+        //    isGreen = true;
+        //    Debug.Log("Enter " + collision.gameObject.name);
+        //}
+        //else if ((isYellow == false) && collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
+        //{
+        //    isYellow = true;
+        //    Debug.Log("Enter " + collision.gameObject.name);
+        //}
+        //else if ((isRed == false) && collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
+        //{
+        //    isRed = true;
+        //    Debug.Log("Enter " + collision.gameObject.name);
+        //}
     }
 
-    
-
+    private void OnTriggerExit(Collider collision)
+    {
+        if (isGreen == true)
+        {
+            isGreen = false;
+            Debug.Log("Exit " + collision.gameObject.name);
+            
+        }
+        else if (isYellow == true)
+        {
+            isYellow = false;
+            Debug.Log("Exit " + collision.gameObject.name);
+        }
+        else if (isRed == true)
+        {
+            isRed= false;
+            Debug.Log("Exit " + collision.gameObject.name);
+        }
+    }
 }

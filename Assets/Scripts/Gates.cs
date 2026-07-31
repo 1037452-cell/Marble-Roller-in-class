@@ -1,10 +1,21 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlaneMovement : MonoBehaviour
+public class Gates : MonoBehaviour
 {
-    // Positions
+    // Gate Groups
+    public GreenGates green;
+    public YellowGates yellow;
+    public RedGates red;
+
+    // Children
+    public Transform greenMove;
+    public Transform yellowMove;
+    public Transform redMove;
+
+    // Plane Reference
+    public PlaneMovement plane;
+
+    // Movement
     public Transform myTransform;
     public float currentXPosition;
     public float currentYPosition;
@@ -21,31 +32,31 @@ public class PlaneMovement : MonoBehaviour
     public bool isYellow;
     public bool isRed;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentXPosition = myTransform.position.x;
-        currentYPosition = myTransform.position.y;
-        currentZPosition = myTransform.position.z;
-        startSpeed = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlane();
 
-
-        //if (Keyboard.current.spaceKey.isPressed)
-        //{
-        //    MovePlane();
-        //}
     }
 
-    private void MovePlane()
+    private void GreenBoost()
     {
-        myTransform.position = (new Vector3(currentXPosition += (Time.deltaTime * startSpeed), 0f, currentZPosition));
+
     }
 
+    private void YellowBoost()
+    {
+
+    }
+
+
+    private void RedSlow()
+    {
+
+    }
 }
