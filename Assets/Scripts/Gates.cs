@@ -123,11 +123,4 @@ public class Gates : MonoBehaviour
         Debug.Log("Blue Boost Active");
     }
     
-    private void GateSwan()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            
-        }
-    }
 }
