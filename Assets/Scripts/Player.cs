@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
     // Player Position
     public Transform myTransform;
     public int mySlot;
+    
+    // Player Material
+    public MeshRenderer myMeshRenderer;
 
     // Rigid Body
     public Rigidbody myRigidbody;
@@ -27,12 +31,17 @@ public class Player : MonoBehaviour
     public bool isGreen = false;
     public bool isYellow = false;
     public bool isRed = false;
+    public bool isBlue = false;
 
     // Gate Reference
     public Gates gatesSpawned; 
     public GreenGates greenGates;
     public YellowGates yellowGates;
     public RedGates redGates;
+    public BlueGates blueGates;
+    
+    // Slot Colours Reference
+    public SlotColour slotColour;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,7 +69,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.jKey.wasPressedThisFrame)
+        if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.jKey.wasPressedThisFrame) // move player right
         {
             myTransform.position = allSlots[mySlot + 1].position;
             mySlot++;
@@ -74,11 +83,28 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (myTransform.position == slotL1.position)
+        {
+            myMeshRenderer.material.color = slotColour.s1.material.color;
+        }
+        else if (myTransform.position == slotL2.position)
+        {
+            myMeshRenderer.material.color = slotColour.s2.material.color;
+        }
+        else if (myTransform.position == slotR1.position)
+        {
+            myMeshRenderer.material.color = slotColour.s3.material.color;
+        }
+        else if (myTransform.position == slotR2.position)
+        {
+            myMeshRenderer.material.color = slotColour.s4.material.color;
+        }
+
 }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collision) // get the colour of the collided gate
     {
-        if (isGreen == false && isYellow == false && isRed == false)
+        if (isGreen == false && isYellow == false && isRed == false &&  isBlue == false)
         {
             if (collision.gameObject.tag == "Green")
             {
@@ -95,8 +121,13 @@ public class Player : MonoBehaviour
                 isRed = true;
                 Debug.Log("Triggered " + collision.gameObject.name);
             }
+            else if (collision.gameObject.tag == "Blue")
+            {
+                isBlue = true;
+                Debug.Log("Triggered " + collision.gameObject.name);
+            }
         }
-
+        
 
         //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
         //{
@@ -136,5 +167,12 @@ public class Player : MonoBehaviour
             gatesSpawned.isRed = false;
             Debug.Log("Exit " + collision.gameObject.name);
         }
+        else if  (isBlue == true)
+        {
+            isBlue = false;
+            gatesSpawned.isBlue = false;
+            Debug.Log("Exit " + collision.gameObject.name);
+        }
     }
+
 }

@@ -1,0 +1,136 @@
+using System.Collections;
+using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
+
+public class SlotColour : MonoBehaviour
+{
+    // Material Colours
+    public Material green;
+    public Material yellow;
+    public Material red;
+    public Material blue;
+    public List<Material> colourCollection;
+    
+    // Slots
+    public MeshRenderer s1;
+    public MeshRenderer s2;
+    public MeshRenderer s3;
+    public MeshRenderer s4;
+    public List<MeshRenderer> slotCollection;
+
+    // Colour Reference
+    public Material colour1;
+    public Material colour2;
+    public Material colour3;
+    public Material colour4;
+    public List<Material> colourRefCollection;
+    
+   
+    
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+      colourCollection = new List<Material>();
+      slotCollection = new List<MeshRenderer>();
+      
+      slotCollection.Add(s1);
+      slotCollection.Add(s2);
+      slotCollection.Add(s3);
+      slotCollection.Add(s4);
+      
+      MakeColourList();
+      
+      colourRefCollection.Add(colour1);
+      colourRefCollection.Add(colour2);
+      colourRefCollection.Add(colour3);
+      colourRefCollection.Add(colour4);
+      
+      RollColours();
+      SetColours();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (colourCollection.Count != 0)
+            {
+                RollColours();
+                SetColours();
+                StartCoroutine(HideMesh()); // HOW TO CHECK IF ALREADY RUNNING?
+            }
+        }
+    }
+
+
+    private void RollColours()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            int r = Random.Range(0, colourCollection.Count);
+            colourRefCollection[i] = colourCollection[r];
+            Debug.Log("Removing colour " + colourCollection[r].name);
+            colourCollection.RemoveAt(r);
+        }
+    }
+
+    private void AssignColours()
+    {
+        colour1 = colourRefCollection[0];
+        colour2 = colourRefCollection[1];
+        colour3 = colourRefCollection[2];
+        colour4 = colourRefCollection[3];
+    }
+
+    private void MakeColourList()
+    {
+        if (colourCollection.Count != 4)
+        {
+            colourCollection.Add(green);
+            colourCollection.Add(yellow);
+            colourCollection.Add(red);
+            colourCollection.Add(blue);
+        }
+    }
+    
+    
+    private void SetColours()
+    {
+        AssignColours();
+        
+        s1.material = colour1;
+        s2.material = colour2;
+        s3.material = colour3;
+        s4.material = colour4;
+        
+        GetMesh(); // Show Mesh again
+        
+        MakeColourList();
+    }
+
+    private void GetMesh()
+    {
+        s1.enabled = true;
+        s2.enabled = true;
+        s3.enabled = true;
+        s4.enabled = true;
+    }
+    
+    
+    private IEnumerator HideMesh() // Hide Mesh in a sequence
+    {
+        yield return new WaitForSeconds(3);
+        s1.enabled = false;
+        yield return new WaitForSeconds(0.8f);
+        s2.enabled = false;
+        yield return new WaitForSeconds(0.6f);
+        s3.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        s4.enabled = false;
+
+        yield return null;
+    }
+    
+}

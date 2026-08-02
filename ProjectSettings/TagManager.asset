@@ -7,6 +7,9 @@ TagManager:
   - Green
   - Yellow
   - Red
+  - Blue
+  - Slot
+  - Gate
   layers:
   - Default
   - TransparentFX

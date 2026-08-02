@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RedGates : MonoBehaviour
+public class BlueGates : MonoBehaviour
 {
     // Reference of player
     public Player player;
@@ -15,19 +15,19 @@ public class RedGates : MonoBehaviour
     public GameObject gameObject4;
 
     // Green Gates Position
-    public Transform redGate1;
-    public Transform redGate2;
-    public Transform redGate3;
-    public Transform redGate4;
+    public Transform blueGate1;
+    public Transform blueGate2;
+    public Transform blueGate3;
+    public Transform blueGate4;
 
     // Green Colliders 
-    public BoxCollider r1;
-    public BoxCollider r2;
-    public BoxCollider r3;
-    public BoxCollider r4;
+    public BoxCollider b1;
+    public BoxCollider b2;
+    public BoxCollider b3;
+    public BoxCollider b4;
     
     public int number;
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,11 +46,10 @@ public class RedGates : MonoBehaviour
             RandomeGate();
         }
     }
-
     private void RandomeGate()
     {
         number = Random.Range(0, 3);
-        Debug.Log("Red Random gate = " + number);
+        Debug.Log("Blue Random gate = " + number);
 
         if (number == 0)
         {

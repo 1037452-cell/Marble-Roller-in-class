@@ -26,16 +26,19 @@ public class Gates : MonoBehaviour
     public GreenGates green;
     public YellowGates yellow;
     public RedGates red;
+    public BlueGates blue;
 
     // Trigger Type
     public bool isGreen = false;
     public bool isYellow  = false;
     public bool isRed   = false;
+    public bool isBlue  = false;
     
     // Groups
     public GameObject greens;
     public GameObject yellows;
     public GameObject reds;
+    public GameObject blues;
 
     // Spawn 
     public int spawnX = 44;
@@ -61,7 +64,7 @@ public class Gates : MonoBehaviour
     {
         myTransform.position = (new Vector3(currentXPosition += (Time.deltaTime * startSpeed), currentYPosition, currentZPosition));
         
-        if (isGreen == false && isYellow == false && isRed == false)
+        if (isGreen == false && isYellow == false && isRed == false && isBlue == false)
         {
             if ((player.isGreen == true) && player.GetComponent<SphereCollider>().enabled == true)
             {
@@ -78,8 +81,12 @@ public class Gates : MonoBehaviour
                 isRed = true;
                 RedSlow();
             }
+            else if (player.isBlue == true && player.GetComponent<SphereCollider>().enabled == true)
+            {
+                isBlue = true;
+                BlueBoost();
+            }
         }
-
 
     }
 
@@ -108,5 +115,19 @@ public class Gates : MonoBehaviour
         }
         Debug.Log("Red Slow Active");
     }
-   
+
+    private void BlueBoost()
+    {
+        boostSpeed += 1.1f;
+        startSpeed *= boostSpeed;
+        Debug.Log("Blue Boost Active");
+    }
+    
+    private void GateSwan()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            
+        }
+    }
 }
