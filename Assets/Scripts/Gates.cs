@@ -10,9 +10,6 @@ public class Gates : MonoBehaviour
     // Plane Reference
     public PlaneMovement plane;
 
-    // Colour Gates Reference
-    public SpawnRandom spawnRandomGates;
-
     // Gate Type
     public GreenGates green;
     public YellowGates yellow;

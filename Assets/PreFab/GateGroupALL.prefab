@@ -442,6 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8620277289501173543}
   - component: {fileID: 2950878352737282174}
+  - component: {fileID: 5759451147409888737}
   m_Layer: 0
   m_Name: GateGroupALL
   m_TagString: Gate
@@ -490,3 +491,21 @@ MonoBehaviour:
   bigBoostSpeed: 0
   slowDown: 0
   speedOverall: 0
+--- !u!114 &5759451147409888737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826080104649085618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88fa08c17828b4a8dacc2440fbc261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {fileID: 7768920094290936168}
+  red: {fileID: 277701011946297431}
+  yellow: {fileID: 1103074217425029815}
+  blue: {fileID: 4629850950054701789}
+  colourList: []
+  TransfromList: []
