@@ -1,6 +1,9 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using UnityEngine.Animations;
 
 public class Gates : MonoBehaviour
 {
@@ -21,6 +24,7 @@ public class Gates : MonoBehaviour
     public float boostSpeed;
     public float bigBoostSpeed;
     public float slowDown;
+    public float speedOverall;
 
     // Gate Type
     public GreenGates green;
@@ -39,6 +43,8 @@ public class Gates : MonoBehaviour
     public GameObject yellows;
     public GameObject reds;
     public GameObject blues;
+    public GameObject colourGroup;
+    public List<GameObject> colourGatesSpawned = new List<GameObject>();
 
     // Spawn 
     public int spawnX = 44;
@@ -47,23 +53,23 @@ public class Gates : MonoBehaviour
     public Transform parent;
 
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        // Transform position
         currentXPosition = myTransform.position.x;
         currentYPosition = myTransform.position.y;
         currentZPosition = myTransform.position.z;
+
+        // Set Speed
         startSpeed = 2;
-        
-        Instantiate(greens, parent); // CAN SPAWN THE PREFABS LIKE THIS
-        // Can set up a coroutine to spawn a group every couple seconds perhaps 
+        speedOverall = startSpeed;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        myTransform.position = (new Vector3(currentXPosition += (Time.deltaTime * startSpeed), currentYPosition, currentZPosition));
-        
         if (isGreen == false && isYellow == false && isRed == false && isBlue == false)
         {
             if ((player.isGreen == true) && player.GetComponent<SphereCollider>().enabled == true)
@@ -85,6 +91,14 @@ public class Gates : MonoBehaviour
             {
                 isBlue = true;
                 BlueBoost();
+            }
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            Instantiate(colourGroup, parent);
+            {
+                colourGatesSpawned.Add(colourGroup);
             }
         }
 
