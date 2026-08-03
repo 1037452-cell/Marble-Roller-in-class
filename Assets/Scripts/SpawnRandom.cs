@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-public class ColouredGates : MonoBehaviour
+public class SpawnRandom : MonoBehaviour
 {
     // Gate Spawn Reference
     public Gates gateSpawn;
+    public GameObject allColourSpawn;
 
     // Slot Position
     public Vector3 s1;
@@ -14,14 +14,14 @@ public class ColouredGates : MonoBehaviour
     public Vector3 s3;
     public Vector3 s4;
     public List<Vector3> positionCollection;
-    
+
     // Slot New
     public Vector3 newS1;
     public Vector3 newS2;
     public Vector3 newS3;
     public Vector3 newS4;
-    public List<Vector3> newTransform; 
-    
+    public List<Vector3> newTransform;
+
     // Gate Type
     public GameObject green;
     public GameObject red;
@@ -39,15 +39,16 @@ public class ColouredGates : MonoBehaviour
     public float spawnY = 1.76f;
     public float spawnZ = 0.71f;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        allColourSpawn.GetComponent<MonoBehaviour>().enabled = false;
+        Instantiate(allColourSpawn);
+
         // Set Up Movement
         currentXPosition = myTransform.position.x;
         currentYPosition = myTransform.position.y;
         currentZPosition = myTransform.position.z;
-
 
         // Set Up Spawner
         s1 = green.GetComponent<Transform>().position;
@@ -64,16 +65,15 @@ public class ColouredGates : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myTransform.position = (new Vector3(currentXPosition += (Time.deltaTime * 2), currentYPosition, currentZPosition));
 
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             GetPositions();
             RandomGates();
             SetNewGates();
         }
     }
-    
+
     private void RandomGates()
     {
         for (int i = 0; i < 4; i++)
@@ -99,8 +99,8 @@ public class ColouredGates : MonoBehaviour
         positionCollection.Add(s3);
         positionCollection.Add(s4);
     }
-    
-    
+
+
     private void GetNewTransforms()
     {
         newTransform.Add(newS1);
@@ -119,3 +119,4 @@ public class ColouredGates : MonoBehaviour
 
 
 }
+

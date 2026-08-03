@@ -1,9 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -34,11 +30,7 @@ public class Player : MonoBehaviour
     public bool isBlue = false;
 
     // Gate Reference
-    public Gates gatesSpawned; 
-    public GreenGates greenGates;
-    public YellowGates yellowGates;
-    public RedGates redGates;
-    public BlueGates blueGates;
+    public Gates gatesSpawned;
     
     // Slot Colours Reference
     public SlotColour slotColour;
