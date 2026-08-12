@@ -57,9 +57,7 @@ public class SlotColour : MonoBehaviour
         {
             if (colourCollection.Count != 0)
             {
-                RollColours();
-                SetColours();
-                StartCoroutine(HideMesh()); // HOW TO CHECK IF ALREADY RUNNING?
+                ChangePlayerSlotColour();
             }
         }
     }
@@ -117,20 +115,12 @@ public class SlotColour : MonoBehaviour
         s3.enabled = true;
         s4.enabled = true;
     }
-    
-    
-    private IEnumerator HideMesh() // Hide Mesh in a sequence
-    {
-        yield return new WaitForSeconds(3);
-        s1.enabled = false;
-        yield return new WaitForSeconds(0.8f);
-        s2.enabled = false;
-        yield return new WaitForSeconds(0.6f);
-        s3.enabled = false;
-        yield return new WaitForSeconds(0.5f);
-        s4.enabled = false;
 
-        yield return null;
+    public void ChangePlayerSlotColour()
+    {
+        RollColours();
+        SetColours();
     }
+    
     
 }

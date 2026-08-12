@@ -12,14 +12,17 @@ public class Player : MonoBehaviour
     public Transform slotOffR;
     public Transform[] allSlots = new Transform[6];
 
-
     // Player Position
     public Transform myTransform;
     public int mySlot;
     
     // Player Material
     public MeshRenderer myMeshRenderer;
-
+    public Material green;
+    public Material red;
+    public Material yellow;
+    public Material blue;
+    
     // Rigid Body
     public Rigidbody myRigidbody;
 
@@ -29,9 +32,6 @@ public class Player : MonoBehaviour
     public bool isRed = false;
     public bool isBlue = false;
 
-    // Gate Reference
-    public Gates gatesSpawned;
-    
     // Slot Colours Reference
     public SlotColour slotColour;
 
@@ -96,12 +96,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision) // get the colour of the collided gate
     {
-        if (isGreen == false && isYellow == false && isRed == false &&  isBlue == false)
-        {
-            if (collision.gameObject.tag == "Green")
+            if (collision.gameObject.tag == "Green" && myMeshRenderer.material == green)
             {
                 isGreen = true;
+                slotColour.ChangePlayerSlotColour();
                 Debug.Log("Triggered " + collision.gameObject.name);
+                
+                
             }
             else  if (collision.gameObject.tag == "Yellow")
             {
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
                 isBlue = true;
                 Debug.Log("Triggered " + collision.gameObject.name);
             }
-        }
+    }
         
 
         //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
@@ -137,34 +138,3 @@ public class Player : MonoBehaviour
         //    Debug.Log("Enter " + collision.gameObject.name);
         //}
     }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (isGreen == true)
-        {
-            isGreen = false;
-            gatesSpawned.isGreen = false;
-            Debug.Log("Exit " + collision.gameObject.name);
-            
-        }
-        else if (isYellow == true)
-        {
-            isYellow = false;
-            gatesSpawned.isYellow = false;
-            Debug.Log("Exit " + collision.gameObject.name);
-        }
-        else if (isRed == true)
-        {
-            isRed= false;
-            gatesSpawned.isRed = false;
-            Debug.Log("Exit " + collision.gameObject.name);
-        }
-        else if  (isBlue == true)
-        {
-            isBlue = false;
-            gatesSpawned.isBlue = false;
-            Debug.Log("Exit " + collision.gameObject.name);
-        }
-    }
-
-}

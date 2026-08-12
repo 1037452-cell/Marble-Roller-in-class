@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public partial class Spawner : MonoBehaviour
 {
 
     public int number = 10;

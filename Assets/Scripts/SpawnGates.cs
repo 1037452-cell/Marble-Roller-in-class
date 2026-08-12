@@ -1,40 +1,36 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
-public class RandomSpawn : MonoBehaviour
+public class SpawnGates : MonoBehaviour
 {
     public Transform myTransform;
-    public GameObject colourGroup;
+    
     
     // Reference to gates in ALLGATES prefab
     public GameObject green;
     public GameObject red;
     public GameObject yellow;
     public GameObject blue;
+
+    public bool isGreen;
+    public bool isRed;
+    public bool isYellow;
+    public bool isBlue; 
     
-    public float greenPosition;
-    public float redPosition;
-    public float yellowPosition;
-    public float bluePosition;
     
     // Collections for randomise
     public float[] colourCollectionTransforms;
-    public List<int> zPosition;
+    public List<float> zPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        greenPosition = green.transform.position.z;
-        redPosition = red.transform.position.z;
-        yellowPosition = yellow.transform.position.z;
-        bluePosition = blue.transform.position.z;
-        
-        
         // Make Array
-        zPosition.Add(-6);
-        zPosition.Add(-3);
-        zPosition.Add(-0);
-        zPosition.Add(3);
+        zPosition.Add(green.transform.position.z);
+        zPosition.Add(red.transform.position.z);
+        zPosition.Add(yellow.transform.position.z);
+        zPosition.Add(blue.transform.position.z);
         
         colourCollectionTransforms = new[] {green.transform.position.z, red.transform.position.z, yellow.transform.position.z, blue.transform.position.z };
         
@@ -47,21 +43,19 @@ public class RandomSpawn : MonoBehaviour
             zPosition.RemoveAt(r);
             Debug.Log("is now " + colourCollectionTransforms[i]);
         }
-
-        greenPosition = colourCollectionTransforms[0];
-        redPosition = colourCollectionTransforms[1];
-        yellowPosition = colourCollectionTransforms[2];
-        bluePosition = colourCollectionTransforms[3];
-        
-        Debug.Log("green is " + greenPosition + " red is " + redPosition + " yellow is "  + yellowPosition + " blue is " + bluePosition);
-        
-        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            Instantiate(green);
+            Instantiate(red);
+            Instantiate(yellow);
+            Instantiate(blue);
+        }
     }
 }
+
