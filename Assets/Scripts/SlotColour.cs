@@ -57,7 +57,7 @@ public class SlotColour : MonoBehaviour
         {
             if (colourCollection.Count != 0)
             {
-                ChangePlayerSlotColour();
+                ChangeSlotColour();
             }
         }
     }
@@ -116,7 +116,7 @@ public class SlotColour : MonoBehaviour
         s4.enabled = true;
     }
 
-    public void ChangePlayerSlotColour()
+    public void ChangeSlotColour()
     {
         RollColours();
         SetColours();

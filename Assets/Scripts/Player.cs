@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public bool isAlive = true;
+
     // Rails
     public Transform slotOffL;
     public Transform slotL1;
@@ -47,7 +49,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.fKey.wasPressedThisFrame) // move the player left
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && isAlive)
+        {
+            isAlive = false;
+        }
+        else if (Keyboard.current.escapeKey.wasPressedThisFrame && !isAlive)
+        {
+            isAlive = true;
+        }
+
+
+
+
+            if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.fKey.wasPressedThisFrame) // move the player left
         {
             myTransform.position = allSlots[mySlot - 1].position;
             mySlot--;
@@ -77,19 +91,19 @@ public class Player : MonoBehaviour
 
         if (myTransform.position == slotL1.position)
         {
-            myMeshRenderer.material.color = slotColour.s1.material.color;
+            myMeshRenderer.material = slotColour.s1.material;
         }
         else if (myTransform.position == slotL2.position)
         {
-            myMeshRenderer.material.color = slotColour.s2.material.color;
+            myMeshRenderer.material = slotColour.s2.material;
         }
         else if (myTransform.position == slotR1.position)
         {
-            myMeshRenderer.material.color = slotColour.s3.material.color;
+            myMeshRenderer.material = slotColour.s3.material;
         }
         else if (myTransform.position == slotR2.position)
         {
-            myMeshRenderer.material.color = slotColour.s4.material.color;
+            myMeshRenderer.material = slotColour.s4.material;
         }
 
 }
@@ -99,7 +113,7 @@ public class Player : MonoBehaviour
             if (collision.gameObject.tag == "Green" && myMeshRenderer.material == green)
             {
                 isGreen = true;
-                slotColour.ChangePlayerSlotColour();
+                slotColour.ChangeSlotColour();
                 Debug.Log("Triggered " + collision.gameObject.name);
                 
                 
