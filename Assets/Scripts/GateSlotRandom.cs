@@ -17,8 +17,11 @@ public class GateSlotRandom : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        
+    { 
+        green.transform.position = s1.transform.position;
+        red.transform.position = s3.transform.position;
+        yellow.transform.position = s2.transform.position;
+        blue.transform.position = s3.transform.position;  
     }
 
     // Update is called once per frame
