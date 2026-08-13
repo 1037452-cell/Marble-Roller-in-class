@@ -1,10 +1,7 @@
-using System.Collections;
 using UnityEngine;
 
-public class GateSlotSpawn : MonoBehaviour
+public class GateSlotRandom : MonoBehaviour
 {
-    public Player player;
-
     // Slot in Spawn Position
     public GameObject s1;
     public GameObject s2;
@@ -17,15 +14,11 @@ public class GateSlotSpawn : MonoBehaviour
     public GameObject yellow;
     public GameObject blue;
 
-    public GameObject gateGroup;
-
-
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SpawningSequence());
+        
     }
 
     // Update is called once per frame
@@ -33,16 +26,4 @@ public class GateSlotSpawn : MonoBehaviour
     {
         
     }
-
-    private IEnumerator SpawningSequence()
-    {
-        while (player.isAlive)
-        {
-            Instantiate(gateGroup);
-            yield return new WaitForSeconds(3);
-        }
-
-    }
-
-
 }
