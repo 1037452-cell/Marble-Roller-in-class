@@ -1,27 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// Randomly removes one of the gates ready to be spawned
+/// Colour remains the same for now but plans to randomise positon in the future, had lots of trouble trying to get it to work as prefabs
+/// </summary>
 
 public class GateSlotRandom : MonoBehaviour
 {
-    // Slot in Spawn Position
-    public GameObject s1;
-    public GameObject s2;
-    public GameObject s3;
-    public GameObject s4;
-
-    // Coloue Gates
     public GameObject green;
     public GameObject red;
     public GameObject yellow;
     public GameObject blue;
-
+    public List<GameObject> Colours;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    { 
-        green.transform.position = s1.transform.position;
-        red.transform.position = s3.transform.position;
-        yellow.transform.position = s2.transform.position;
-        blue.transform.position = s3.transform.position;  
+    {
+        Colours.Add(green);
+        Colours.Add(red);
+        Colours.Add(yellow);
+        Colours.Add(blue);
+        
+        int r = Random.Range(0, Colours.Count);
+        
+        Debug.Log(r);
+        Debug.Log(Colours[r]);
+        Colours.RemoveAt(r);
     }
 
     // Update is called once per frame
