@@ -24,8 +24,6 @@ public class GateSlotRandom : MonoBehaviour
         
         int r = Random.Range(0, Colours.Count);
         
-        Debug.Log(r);
-        Debug.Log(Colours[r]);
         Colours.RemoveAt(r);
     }
 

@@ -20,14 +20,13 @@ public class Player : MonoBehaviour
     
     // Player Material
     public MeshRenderer myMeshRenderer;
+
     public Material green;
     public Material red;
     public Material yellow;
     public Material blue;
-    
-    // Rigid Body
-    public Rigidbody myRigidbody;
 
+    
     // Trigger Type
     public bool isGreen = false;
     public bool isYellow = false;
@@ -43,7 +42,7 @@ public class Player : MonoBehaviour
     {
         myTransform.position = slotR1.position;
         mySlot = 3;
-        myRigidbody = GetComponent<Rigidbody>();
+        myMeshRenderer.material = CheckColour(); 
     }
 
     // Update is called once per frame
@@ -61,94 +60,111 @@ public class Player : MonoBehaviour
 
 
 
-            if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.fKey.wasPressedThisFrame) // move the player left
+        if (Keyboard.current.fKey.wasPressedThisFrame) // move the player left
         {
             myTransform.position = allSlots[mySlot - 1].position;
             mySlot--;
-            Debug.Log("Postion " + mySlot);
+            myMeshRenderer.material = CheckColour();
 
             if (mySlot == 0) // loop the player over to the right 
             {
                 myTransform.position = slotR2.position;
                 mySlot = 4;
-                Debug.Log("Postion " + mySlot);
+                myMeshRenderer.material = CheckColour();
             }
         }
 
-        if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.jKey.wasPressedThisFrame) // move player right
+        if (Keyboard.current.jKey.wasPressedThisFrame) // move player right
         {
             myTransform.position = allSlots[mySlot + 1].position;
             mySlot++;
-            Debug.Log("Postion " + mySlot);
+            myMeshRenderer.material = CheckColour();
 
             if (mySlot == 5) // loop the player over to the left 
             {
                 myTransform.position = slotL1.position;
                 mySlot = 1;
-                Debug.Log("Postion " + mySlot);
+                myMeshRenderer.material = CheckColour();
             }
         }
 
-        if (myTransform.position == slotL1.position)
-        {
-            myMeshRenderer.material = slotColour.s1.material;
-        }
-        else if (myTransform.position == slotL2.position)
-        {
-            myMeshRenderer.material = slotColour.s2.material;
-        }
-        else if (myTransform.position == slotR1.position)
-        {
-            myMeshRenderer.material = slotColour.s3.material;
-        }
-        else if (myTransform.position == slotR2.position)
-        {
-            myMeshRenderer.material = slotColour.s4.material;
-        }
 
 }
 
-    private void OnTriggerEnter(Collider collision) // get the colour of the collided gate
+    private void OnTriggerEnter(Collider collision)
     {
-            if (collision.gameObject.tag == "Green" && myMeshRenderer.material == green)
+            if (collision.gameObject.tag == "Green")
             {
-                isGreen = true;
-                slotColour.ChangeSlotColour();
                 Debug.Log("Triggered " + collision.gameObject.name);
                 
-                
+                if (myMeshRenderer.material == green && collision.gameObject.tag == "Green")
+                {
+                    Debug.Log("WAS ALSO GREEN");
+                    isGreen = true;
+                    slotColour.ChangeSlotColour();
+                }
             }
-            else  if (collision.gameObject.tag == "Yellow")
+            else  if (collision.gameObject.tag == "Yellow" && myMeshRenderer.material == yellow)
             {
                 isYellow = true;
+                slotColour.ChangeSlotColour();
+
                 Debug.Log("Triggered " + collision.gameObject.name);
             }
-            else if (collision.gameObject.tag == "Red")
+            else if (collision.gameObject.tag == "Red" && myMeshRenderer.material == red)
             {
                 isRed = true;
+                slotColour.ChangeSlotColour();
+
                 Debug.Log("Triggered " + collision.gameObject.name);
             }
-            else if (collision.gameObject.tag == "Blue")
+            else if (collision.gameObject.tag == "Blue" && myMeshRenderer.material == blue)
             {
                 isBlue = true;
+                slotColour.ChangeSlotColour();
+
                 Debug.Log("Triggered " + collision.gameObject.name);
             }
     }
-        
 
-        //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
-        //{
-        //    isGreen = true;
-        //    Debug.Log("Enter " + collision.gameObject.name);
-        //}
-        //else if ((isYellow == false) && collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
-        //{
-        //    isYellow = true;
-        //    Debug.Log("Enter " + collision.gameObject.name);
-        //}
-        //else if ((isRed == false) && collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
-        //{
-        //    isRed = true;
-        //    Debug.Log("Enter " + collision.gameObject.name);
-        //}
+    public Material CheckColour()
+    {
+        if (myTransform.position == slotL1.position)
+        {
+            return slotColour.s1.material;
+        }
+        else if (myTransform.position == slotL2.position)
+        {
+            return slotColour.s2.material;
+        }
+        else if (myTransform.position == slotR1.position)
+        {
+            return slotColour.s3.material;
+        }
+        else if (myTransform.position == slotR2.position)
+        {
+            return slotColour.s4.material;
+        }
+        else
+        {
+            return null;
+        }
     }
+
+
+    //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
+    //{
+    //    isGreen = true;
+    //    Debug.Log("Enter " + collision.gameObject.name);
+    //}
+    //else if ((isYellow == false) && collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
+    //{
+    //    isYellow = true;
+    //    Debug.Log("Enter " + collision.gameObject.name);
+    //}
+    //else if ((isRed == false) && collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
+    //{
+    //    isRed = true;
+    //    Debug.Log("Enter " + collision.gameObject.name);
+    //}
+}

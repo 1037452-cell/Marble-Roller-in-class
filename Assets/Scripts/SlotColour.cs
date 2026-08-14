@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class SlotColour : MonoBehaviour
 {
+    public Player player;
+    
     // Material Colours
     public Material green;
     public Material yellow;
@@ -55,10 +57,8 @@ public class SlotColour : MonoBehaviour
     {
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            if (colourCollection.Count != 0)
-            {
-                ChangeSlotColour();
-            }
+            ChangeSlotColour();
+            player.myMeshRenderer.material = player.CheckColour();
         }
     }
 
@@ -69,7 +69,6 @@ public class SlotColour : MonoBehaviour
         {
             int r = Random.Range(0, colourCollection.Count);
             colourRefCollection[i] = colourCollection[r];
-            Debug.Log("Removing colour " + colourCollection[r].name);
             colourCollection.RemoveAt(r);
         }
     }
