@@ -3,8 +3,9 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     // Script Ref
-    public Player player;
+    public UI uI;
     public GateMove move;
+    
     
     // Scoring
     public int score;
@@ -17,6 +18,8 @@ public class GameMaster : MonoBehaviour
         score = 0;
         bonus = 10;
         bonusMultiplier = 1;
+        uI.scoreText.text = "Score: " + score.ToString();
+        uI.multiText.text += bonusMultiplier.ToString();
     }
 
     // Update is called once per frame

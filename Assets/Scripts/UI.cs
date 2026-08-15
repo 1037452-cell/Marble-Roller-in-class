@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public Player player;
     public GameMaster gameMaster;
+    public GateMove move;
     
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiText;
+    
+    public TextMeshProUGUI speedText;
     
     public Image greenImage;
     public Image redImage;
@@ -22,9 +24,6 @@ public class UI : MonoBehaviour
         redImage.enabled = false;
         yellowImage.enabled = false;
         blueImage.enabled = false;
-        
-        scoreText.text = "Score: " + gameMaster.score.ToString();
-        multiText.text = "Muti: x" + gameMaster.bonusMultiplier.ToString();
     }
 
     // Update is called once per frame

@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     // Game Ref
     public GameMaster gameMaster;
 
+    // Speed
+    public GateMove move;
+    
     // UI Ref
     public UI uI;
     
@@ -110,9 +113,7 @@ public class Player : MonoBehaviour
                 Debug.Log("WAS ALSO GREEN");
                 isGreen = true;
                 uI.greenImage.enabled = true;
-                slotColour.ChangeSlotColour();
-                gameMaster.score++; // +1 to score
-                uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                NewStats();
                 }
                 else // Player is not green
                 {
@@ -128,9 +129,7 @@ public class Player : MonoBehaviour
                     Debug.Log("WAS ALSO YELLOW");
                     isYellow = true;
                     uI.yellowImage.enabled = true;
-                    slotColour.ChangeSlotColour();
-                    gameMaster.score++; // +1 to score
-                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                    NewStats();
                 }
                 else // Player is not yellow
                 {
@@ -148,9 +147,7 @@ public class Player : MonoBehaviour
                     Debug.Log("WAS ALSO RED");
                     isRed = true;
                     uI.redImage.enabled = true;
-                    slotColour.ChangeSlotColour();
-                    gameMaster.score++; // +1 to score
-                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                    NewStats();
                 }
                 else // Player is not red
                 {
@@ -168,9 +165,7 @@ public class Player : MonoBehaviour
                     Debug.Log("WAS ALSO BLUE");
                     isBlue = true;
                     uI.blueImage.enabled = true;
-                    slotColour.ChangeSlotColour();
-                    gameMaster.score++; // +1 to score
-                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                    NewStats();
                 }
                 else // Player is not blue
                 {
@@ -216,12 +211,15 @@ public class Player : MonoBehaviour
     {
         if (isGreen == true && isRed == true && isYellow == true && isBlue == true)
         {
+            // Score
             gameMaster.bonus *= gameMaster.bonusMultiplier;
             gameMaster.score += gameMaster.bonus;
             Debug.Log("Bonus Score " + gameMaster.bonus + " added");
             gameMaster.bonusMultiplier++; // Add 1 to multi 
             uI.multiText.text = "Muti: x" + gameMaster.bonusMultiplier.ToString(); // UI Update
-
+            uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+            
+            // Reset gates 
             isGreen = false;
             uI.greenImage.enabled = false;
             isRed = false;
@@ -230,7 +228,22 @@ public class Player : MonoBehaviour
             uI.yellowImage.enabled = false;
             isBlue = false;
             uI.blueImage.enabled = false;
+            
+            // Speed Up
+            move.speedOverall += move.bigBoostSpeed;
+            Debug.Log("BIG Boost added, new speed: " + move.speedOverall);
         }
     }
+
+    // Use whenever a gate has been passed through
+    private void NewStats()
+    {
+        slotColour.ChangeSlotColour();
+        move.speedOverall += move.boostSpeed; // Increase speed
+        Debug.Log("Small boost added, new speed: " + move.speedOverall);
+        gameMaster.score++; // +1 to score
+        uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+    }
+    
     
 }

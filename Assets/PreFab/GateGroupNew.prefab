@@ -378,12 +378,13 @@ MonoBehaviour:
   currentXPosition: 0
   currentYPosition: 0
   currentZPosition: 0
-  moving: {x: 0, y: 0, z: 0}
-  startSpeed: 0
+  startSpeed: 2
   boostSpeed: 0
   bigBoostSpeed: 0
   slowDown: 0
-  speedOverall: 0
+  speedOverall: 21.24
+  spawnGroup: {fileID: 0}
+  uI: {fileID: 0}
 --- !u!114 &5520188207783404056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8493949168185481008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d19499539e5ad8c45af4464d309c823c, type: 3}
   m_Name: 

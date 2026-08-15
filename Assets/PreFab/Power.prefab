@@ -126,12 +126,13 @@ MonoBehaviour:
   currentXPosition: 0
   currentYPosition: 0
   currentZPosition: 0
-  moving: {x: 0, y: 0, z: 0}
-  startSpeed: 0
+  startSpeed: 2
   boostSpeed: 0
   bigBoostSpeed: 0
   slowDown: 0
   speedOverall: 0
+  spawnGroup: {fileID: 0}
+  uI: {fileID: 0}
 --- !u!114 &6457688473412914023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 973277255726551365}
+  myMaterial: {fileID: 2100000, guid: 4ca3f5ed1dbe5574b88439fcc814c069, type: 2}
