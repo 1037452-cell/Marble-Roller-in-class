@@ -1,14 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SpawnGroup : MonoBehaviour
 {
-    public Transform myTransform;
     public GameObject groupAllColours;
 
     public Player player;
-
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,11 +13,6 @@ public class SpawnGroup : MonoBehaviour
         StartCoroutine(SpawningSequence());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private IEnumerator SpawningSequence()
     {

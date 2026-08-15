@@ -58,7 +58,7 @@ public class SlotColour : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             ChangeSlotColour();
-            player.myMeshRenderer.material = player.CheckColour();
+            
         }
     }
 
@@ -115,11 +115,29 @@ public class SlotColour : MonoBehaviour
         s4.enabled = true;
     }
 
+    // Executes a bunch of functions that randomise the slot colours
     public void ChangeSlotColour()
     {
         RollColours();
         SetColours();
+        
+        // Update player colour
+        if (player.mySlot == 1)
+        {
+            player.myMeshRenderer.material = player.slotColour.s1.material;
+        }
+        else if (player.mySlot == 2)
+        {
+            player.myMeshRenderer.material = player.slotColour.s2.material;
+        }
+        else if (player.mySlot == 3)
+        {
+            player.myMeshRenderer.material = player.slotColour.s3.material;
+        }
+        else if (player.mySlot == 4)
+        {
+            player.myMeshRenderer.material = player.slotColour.s4.material;
+        }
     }
-    
     
 }

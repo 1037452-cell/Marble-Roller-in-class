@@ -10,6 +10,7 @@ TagManager:
   - Blue
   - Slot
   - Gate
+  - power
   layers:
   - Default
   - TransparentFX

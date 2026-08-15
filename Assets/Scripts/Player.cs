@@ -4,7 +4,14 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public bool isAlive = true;
+    public GameObject myGameObject;
 
+    // Game Ref
+    public GameMaster gameMaster;
+
+    // UI Ref
+    public UI uI;
+    
     // Rails
     public Transform slotOffL;
     public Transform slotL1;
@@ -17,6 +24,10 @@ public class Player : MonoBehaviour
     // Player Position
     public Transform myTransform;
     public int mySlot;
+    public int slot1 = 1;
+    public int slot2 = 2;
+    public int slot3 = 3;
+    public int slot4 = 4;
     
     // Player Material
     public MeshRenderer myMeshRenderer;
@@ -25,7 +36,6 @@ public class Player : MonoBehaviour
     public Material red;
     public Material yellow;
     public Material blue;
-
     
     // Trigger Type
     public bool isGreen = false;
@@ -40,14 +50,16 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        // Start player in position 3
         myTransform.position = slotR1.position;
-        mySlot = 3;
+        mySlot = slot3;
         myMeshRenderer.material = CheckColour(); 
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Dead and Alive checks
         if (Keyboard.current.escapeKey.wasPressedThisFrame && isAlive)
         {
             isAlive = false;
@@ -58,32 +70,30 @@ public class Player : MonoBehaviour
         }
 
 
-
-
-        if (Keyboard.current.fKey.wasPressedThisFrame) // move the player left
+        // Player Movement 
+        if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             myTransform.position = allSlots[mySlot - 1].position;
-            mySlot--;
+            mySlot--; // update slot number
             myMeshRenderer.material = CheckColour();
 
             if (mySlot == 0) // loop the player over to the right 
             {
                 myTransform.position = slotR2.position;
-                mySlot = 4;
+                mySlot = slot4;
                 myMeshRenderer.material = CheckColour();
             }
         }
-
         if (Keyboard.current.jKey.wasPressedThisFrame) // move player right
         {
             myTransform.position = allSlots[mySlot + 1].position;
-            mySlot++;
+            mySlot++; // update slot number
             myMeshRenderer.material = CheckColour();
 
             if (mySlot == 5) // loop the player over to the left 
             {
                 myTransform.position = slotL1.position;
-                mySlot = 1;
+                mySlot = slot1;
                 myMeshRenderer.material = CheckColour();
             }
         }
@@ -93,38 +103,91 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-            if (collision.gameObject.tag == "Green")
+            if (collision.gameObject.tag == "Green") // Slot is green
+            {
+                if (myMeshRenderer.material.color == green.color) // Player is also green
+                {
+                Debug.Log("WAS ALSO GREEN");
+                isGreen = true;
+                uI.greenImage.enabled = true;
+                slotColour.ChangeSlotColour();
+                gameMaster.score++; // +1 to score
+                uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                }
+                else // Player is not green
+                {
+                    isAlive = false;
+                    Destroy(myGameObject);
+                    Debug.Log("GAME OVER");
+                }
+            }
+            else  if (collision.gameObject.tag == "Yellow")
+            {
+                if (myMeshRenderer.material.color == yellow.color) 
+                {
+                    Debug.Log("WAS ALSO YELLOW");
+                    isYellow = true;
+                    uI.yellowImage.enabled = true;
+                    slotColour.ChangeSlotColour();
+                    gameMaster.score++; // +1 to score
+                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                }
+                else // Player is not yellow
+                {
+                    isAlive = false;
+                    Destroy(myGameObject);
+                    Debug.Log("GAME OVER");
+                }
+            }
+            else if (collision.gameObject.tag == "Red")
             {
                 Debug.Log("Triggered " + collision.gameObject.name);
                 
-                if (myMeshRenderer.material == green && collision.gameObject.tag == "Green")
+                if (myMeshRenderer.material.color == red.color) 
                 {
-                    Debug.Log("WAS ALSO GREEN");
-                    isGreen = true;
+                    Debug.Log("WAS ALSO RED");
+                    isRed = true;
+                    uI.redImage.enabled = true;
                     slotColour.ChangeSlotColour();
+                    gameMaster.score++; // +1 to score
+                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                }
+                else // Player is not red
+                {
+                    isAlive = false;
+                    Destroy(myGameObject);
+                    Debug.Log("GAME OVER");
                 }
             }
-            else  if (collision.gameObject.tag == "Yellow" && myMeshRenderer.material == yellow)
+            else if (collision.gameObject.tag == "Blue")
             {
-                isYellow = true;
-                slotColour.ChangeSlotColour();
-
                 Debug.Log("Triggered " + collision.gameObject.name);
+                
+                if (myMeshRenderer.material.color == blue.color) 
+                {
+                    Debug.Log("WAS ALSO BLUE");
+                    isBlue = true;
+                    uI.blueImage.enabled = true;
+                    slotColour.ChangeSlotColour();
+                    gameMaster.score++; // +1 to score
+                    uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+                }
+                else // Player is not blue
+                {
+                    isAlive = false;
+                    Destroy(myGameObject);
+                    Debug.Log("GAME OVER");
+                }
             }
-            else if (collision.gameObject.tag == "Red" && myMeshRenderer.material == red)
+            else if (collision.gameObject.tag == "power")
             {
-                isRed = true;
-                slotColour.ChangeSlotColour();
-
                 Debug.Log("Triggered " + collision.gameObject.name);
-            }
-            else if (collision.gameObject.tag == "Blue" && myMeshRenderer.material == blue)
-            {
-                isBlue = true;
                 slotColour.ChangeSlotColour();
-
-                Debug.Log("Triggered " + collision.gameObject.name);
+                Destroy(collision.gameObject);
             }
+
+            AllGatesScored(); // Checking if bonus is triggered
+
     }
 
     public Material CheckColour()
@@ -145,26 +208,29 @@ public class Player : MonoBehaviour
         {
             return slotColour.s4.material;
         }
-        else
+        return null;
+    }
+    
+    // Gives the player bonus score for scoring at least one of each gate
+    public void AllGatesScored()
+    {
+        if (isGreen == true && isRed == true && isYellow == true && isBlue == true)
         {
-            return null;
+            gameMaster.bonus *= gameMaster.bonusMultiplier;
+            gameMaster.score += gameMaster.bonus;
+            Debug.Log("Bonus Score " + gameMaster.bonus + " added");
+            gameMaster.bonusMultiplier++; // Add 1 to multi 
+            uI.multiText.text = "Muti: x" + gameMaster.bonusMultiplier.ToString(); // UI Update
+
+            isGreen = false;
+            uI.greenImage.enabled = false;
+            isRed = false;
+            uI.redImage.enabled = false;
+            isYellow = false;
+            uI.yellowImage.enabled = false;
+            isBlue = false;
+            uI.blueImage.enabled = false;
         }
     }
-
-
-    //if ((isGreen == false) && collision.gameObject.GetComponent<BoxCollider>() == (greenGates.g1 || greenGates.g2 || greenGates.g3 || greenGates.g4))
-    //{
-    //    isGreen = true;
-    //    Debug.Log("Enter " + collision.gameObject.name);
-    //}
-    //else if ((isYellow == false) && collision.gameObject.GetComponent<BoxCollider>() == (yellowGates.y1 || yellowGates.y2 || yellowGates.y3 || yellowGates.y4))
-    //{
-    //    isYellow = true;
-    //    Debug.Log("Enter " + collision.gameObject.name);
-    //}
-    //else if ((isRed == false) && collision.gameObject.GetComponent<BoxCollider>() == (redGates.r1 || redGates.r2 || redGates.r3 || redGates.r4))
-    //{
-    //    isRed = true;
-    //    Debug.Log("Enter " + collision.gameObject.name);
-    //}
+    
 }
