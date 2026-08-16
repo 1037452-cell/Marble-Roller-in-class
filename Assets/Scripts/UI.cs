@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiText;
+    public TextMeshProUGUI winnerText;
     
     public TextMeshProUGUI speedText;
     

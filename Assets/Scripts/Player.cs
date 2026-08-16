@@ -110,11 +110,12 @@ public class Player : MonoBehaviour
             {
                 if (myMeshRenderer.material.color == green.color) // Player is also green
                 {
-                Debug.Log("WAS ALSO GREEN");
-                isGreen = true;
-                uI.greenImage.enabled = true;
-                NewStats();
-                }
+                    Debug.Log("WAS ALSO GREEN");
+                    isGreen = true;
+                    uI.greenImage.enabled = true;
+                    NewStats();
+                    Destroy(collision.gameObject); // Destroy that gate
+            }
                 else // Player is not green
                 {
                     isAlive = false;
@@ -130,7 +131,8 @@ public class Player : MonoBehaviour
                     isYellow = true;
                     uI.yellowImage.enabled = true;
                     NewStats();
-                }
+                    Destroy(collision.gameObject); // Destroy that gate
+            }
                 else // Player is not yellow
                 {
                     isAlive = false;
@@ -148,6 +150,7 @@ public class Player : MonoBehaviour
                     isRed = true;
                     uI.redImage.enabled = true;
                     NewStats();
+                    Destroy(collision.gameObject);
                 }
                 else // Player is not red
                 {
@@ -166,6 +169,7 @@ public class Player : MonoBehaviour
                     isBlue = true;
                     uI.blueImage.enabled = true;
                     NewStats();
+                    Destroy(collision.gameObject);
                 }
                 else // Player is not blue
                 {
@@ -181,7 +185,7 @@ public class Player : MonoBehaviour
                 Destroy(collision.gameObject);
             }
 
-            AllGatesScored(); // Checking if bonus is triggered
+        AllGatesScored(); // Checking if bonus is triggered
 
     }
 
@@ -241,8 +245,16 @@ public class Player : MonoBehaviour
         slotColour.ChangeSlotColour();
         move.speedOverall += move.boostSpeed; // Increase speed
         Debug.Log("Small boost added, new speed: " + move.speedOverall);
-        gameMaster.score++; // +1 to score
+        gameMaster.score += 1 * gameMaster.bonusMultiplier; // +1 x Multi
         uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+
+        // Win condition
+        if (gameMaster.score >= 1000)
+        {
+            gameMaster.isWinner = true;
+            uI.winnerText.enabled = true;
+            isAlive = false;
+        }
     }
     
     

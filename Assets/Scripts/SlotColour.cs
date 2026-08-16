@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 
 public class SlotColour : MonoBehaviour
 {
@@ -52,25 +50,18 @@ public class SlotColour : MonoBehaviour
       SetColours();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            ChangeSlotColour();
-            
-        }
-    }
-
-
     private void RollColours()
     {
-        for (int i = 0; i < 4; i++)
+        if (colourCollection != null)
         {
-            int r = Random.Range(0, colourCollection.Count);
-            colourRefCollection[i] = colourCollection[r];
-            colourCollection.RemoveAt(r);
+            for (int i = 0; i < 4; i++)
+            {
+                int r = Random.Range(0, colourCollection.Count);
+                colourRefCollection[i] = colourCollection[r];
+                colourCollection.RemoveAt(r);
+            }
         }
+        
     }
 
     private void AssignColours()
