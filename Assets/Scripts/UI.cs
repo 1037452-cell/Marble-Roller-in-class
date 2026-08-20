@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiText;
     public TextMeshProUGUI winnerText;
+    public TextMeshProUGUI gameOver;
     
     public TextMeshProUGUI speedText;
     
@@ -25,6 +26,7 @@ public class UI : MonoBehaviour
         redImage.enabled = false;
         yellowImage.enabled = false;
         blueImage.enabled = false;
+        gameOver.enabled = false;
     }
 
     // Update is called once per frame

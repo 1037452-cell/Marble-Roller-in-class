@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
                     isAlive = false;
                     Destroy(myGameObject);
                     Debug.Log("GAME OVER");
+                    uI.gameOver.enabled = true;
                 }
             }
             else  if (collision.gameObject.tag == "Yellow")
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour
                     isAlive = false;
                     Destroy(myGameObject);
                     Debug.Log("GAME OVER");
+                    uI.gameOver.enabled = true;
                 }
             }
             else if (collision.gameObject.tag == "Red")
@@ -157,6 +159,7 @@ public class Player : MonoBehaviour
                     isAlive = false;
                     Destroy(myGameObject);
                     Debug.Log("GAME OVER");
+                    uI.gameOver.enabled = true;
                 }
             }
             else if (collision.gameObject.tag == "Blue")
@@ -176,6 +179,7 @@ public class Player : MonoBehaviour
                     isAlive = false;
                     Destroy(myGameObject);
                     Debug.Log("GAME OVER");
+                    uI.gameOver.enabled = true;
                 }
             }
             else if (collision.gameObject.tag == "power")
