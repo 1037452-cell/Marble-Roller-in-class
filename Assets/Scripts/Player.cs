@@ -9,8 +9,11 @@ public class Player : MonoBehaviour
     // Game Ref
     public GameMaster gameMaster;
 
+    // Spwan Ref
+    public SpawnGroup spawn;
+
     // Speed
-    public GateMove move;
+    public GateControll controll;
     
     // UI Ref
     public UI uI;
@@ -186,6 +189,17 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("Triggered " + collision.gameObject.name);
                 slotColour.ChangeSlotColour();
+                if (controll.speedOverall >= spawn.speed)
+                {
+                    controll.updateSpeed -= controll.slowDown;
+                    uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+                    if (controll.speedOverall < spawn.speed)
+                    {
+                        controll.updateSpeed = controll.startSpeed;
+                    }
+                }
+                
+
                 Destroy(collision.gameObject);
             }
 
@@ -238,8 +252,10 @@ public class Player : MonoBehaviour
             uI.blueImage.enabled = false;
             
             // Speed Up
-            move.speedOverall += move.bigBoostSpeed;
-            Debug.Log("BIG Boost added, new speed: " + move.speedOverall);
+            controll.updateSpeed += controll.bigBoostSpeed;
+            uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+            Debug.Log("BIG Boost added, new speed: " + controll.updateSpeed);
+            spawn.speed--;
         }
     }
 
@@ -247,8 +263,9 @@ public class Player : MonoBehaviour
     private void NewStats()
     {
         slotColour.ChangeSlotColour();
-        move.speedOverall += move.boostSpeed; // Increase speed
-        Debug.Log("Small boost added, new speed: " + move.speedOverall);
+        controll.updateSpeed += controll.boostSpeed; // Increase speed
+        uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+        Debug.Log("Small boost added, new speed: " + controll.updateSpeed);
         gameMaster.score += 1 * gameMaster.bonusMultiplier; // +1 x Multi
         uI.scoreText.text = "Score: " + gameMaster.score.ToString();
 

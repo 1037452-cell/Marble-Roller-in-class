@@ -7,14 +7,15 @@ public class SpawnGroup : MonoBehaviour
 
     public Player player;
 
-    public GateMove move;
-    public int setSpawnSpeed;
+    public GateControll controll;
+    public int speed;
+    public int setSpawnSpeed = 3;
     
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        setSpawnSpeed = 3;
+        speed = setSpawnSpeed;
         StartCoroutine(SpawningSequence());
     }
 
@@ -25,7 +26,7 @@ public class SpawnGroup : MonoBehaviour
         {
             Instantiate(groupAllColours);
 
-            yield return new WaitForSeconds(setSpawnSpeed);
+            yield return new WaitForSeconds(speed);
         }
         
     }

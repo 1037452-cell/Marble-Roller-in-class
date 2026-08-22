@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     public GameMaster gameMaster;
-    public GateMove move;
+    public GateControll controll;
     
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiText;

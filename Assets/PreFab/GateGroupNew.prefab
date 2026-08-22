@@ -333,9 +333,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989507552062544199}
-  - component: {fileID: 1709928431087105289}
-  - component: {fileID: 5520188207783404056}
   - component: {fileID: 3880686821180963841}
+  - component: {fileID: -8343674349250384179}
   m_Layer: 0
   m_Name: GateGroupNew
   m_TagString: Gate
@@ -362,46 +361,6 @@ Transform:
   - {fileID: 8776492634667507931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1709928431087105289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493949168185481008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb1151039d1e414f97ca95833e076a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myTransform: {fileID: 1989507552062544199}
-  currentXPosition: 0
-  currentYPosition: 0
-  currentZPosition: 0
-  startSpeed: 2
-  boostSpeed: 0
-  bigBoostSpeed: 0
-  slowDown: 0
-  speedOverall: 21.24
-  spawnGroup: {fileID: 0}
-  uI: {fileID: 0}
---- !u!114 &5520188207783404056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493949168185481008}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d19499539e5ad8c45af4464d309c823c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  green: {fileID: 4816165136711315458}
-  red: {fileID: 8836221278712188353}
-  yellow: {fileID: 2313733258994669914}
-  blue: {fileID: 1182513534314204649}
-  Colours: []
 --- !u!65 &3880686821180963841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -423,6 +382,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.59, y: -1.8, z: -1.33}
+--- !u!114 &-8343674349250384179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493949168185481008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f90ba2bdff373498f713fe9fd60cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 0}
+  myTransform: {fileID: 1989507552062544199}
 --- !u!1 &8836221278712188353
 GameObject:
   m_ObjectHideFlags: 0

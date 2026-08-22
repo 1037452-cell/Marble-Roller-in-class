@@ -4,7 +4,7 @@ public class GameMaster : MonoBehaviour
 {
     // Script Ref
     public UI uI;
-    public GateMove move;
+    public GateControll controlll;
     
     
     // Scoring

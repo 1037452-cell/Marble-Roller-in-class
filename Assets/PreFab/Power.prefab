@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8307283828399996196}
   - component: {fileID: 5323639532816470918}
   - component: {fileID: 973277255726551365}
-  - component: {fileID: 3297961938179421811}
   - component: {fileID: 6457688473412914023}
+  - component: {fileID: 3357178253593033329}
   m_Layer: 0
   m_Name: Power
   m_TagString: power
@@ -110,29 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3297961938179421811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8567860673674676026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb1151039d1e414f97ca95833e076a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myTransform: {fileID: 5479096422695343847}
-  currentXPosition: 0
-  currentYPosition: 0
-  currentZPosition: 0
-  startSpeed: 2
-  boostSpeed: 0
-  bigBoostSpeed: 0
-  slowDown: 0
-  speedOverall: 0
-  spawnGroup: {fileID: 0}
-  uI: {fileID: 0}
 --- !u!114 &6457688473412914023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +124,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 973277255726551365}
   myMaterial: {fileID: 2100000, guid: 4ca3f5ed1dbe5574b88439fcc814c069, type: 2}
+--- !u!114 &3357178253593033329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567860673674676026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f90ba2bdff373498f713fe9fd60cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 0}
+  myTransform: {fileID: 5479096422695343847}
+  currentXPosition: 0
+  currentYPosition: 0
+  currentZPosition: 0
