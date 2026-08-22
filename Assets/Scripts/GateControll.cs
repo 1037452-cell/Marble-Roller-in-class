@@ -30,14 +30,14 @@ public class GateControll : MonoBehaviour
         currentZPosition = myTransform.position.z;
 
         // Set Speed
-        startSpeed = 2;
+        startSpeed = 4;
         speedOverall = startSpeed;
         updateSpeed = startSpeed;
         uI.speedText.text = "Speed: " + speedOverall.ToString();
 
         // Boost speed set
-        boostSpeed = 1;
-        bigBoostSpeed = 5;
+        boostSpeed = 0.5f;
+        bigBoostSpeed = 2;
         slowDown = 1;
     }
 

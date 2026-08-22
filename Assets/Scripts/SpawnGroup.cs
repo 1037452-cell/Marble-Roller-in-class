@@ -16,6 +16,7 @@ public class SpawnGroup : MonoBehaviour
     void Start()
     {
         speed = setSpawnSpeed;
+        
         StartCoroutine(SpawningSequence());
     }
 
@@ -25,6 +26,7 @@ public class SpawnGroup : MonoBehaviour
       while (player.isAlive)
         {
             Instantiate(groupAllColours);
+            Debug.Log("Spawning default");
 
             yield return new WaitForSeconds(speed);
         }

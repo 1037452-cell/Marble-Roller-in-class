@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     // Speed
     public GateControll controll;
     
+    // Timer
+    public Timer timer;
+    
     // UI Ref
     public UI uI;
     
@@ -121,10 +124,7 @@ public class Player : MonoBehaviour
             }
                 else // Player is not green
                 {
-                    isAlive = false;
-                    Destroy(myGameObject);
-                    Debug.Log("GAME OVER");
-                    uI.gameOver.enabled = true;
+                    GameOver();
                 }
             }
             else  if (collision.gameObject.tag == "Yellow")
@@ -139,10 +139,7 @@ public class Player : MonoBehaviour
             }
                 else // Player is not yellow
                 {
-                    isAlive = false;
-                    Destroy(myGameObject);
-                    Debug.Log("GAME OVER");
-                    uI.gameOver.enabled = true;
+                    GameOver();
                 }
             }
             else if (collision.gameObject.tag == "Red")
@@ -159,10 +156,7 @@ public class Player : MonoBehaviour
                 }
                 else // Player is not red
                 {
-                    isAlive = false;
-                    Destroy(myGameObject);
-                    Debug.Log("GAME OVER");
-                    uI.gameOver.enabled = true;
+                    GameOver();
                 }
             }
             else if (collision.gameObject.tag == "Blue")
@@ -179,25 +173,22 @@ public class Player : MonoBehaviour
                 }
                 else // Player is not blue
                 {
-                    isAlive = false;
-                    Destroy(myGameObject);
-                    Debug.Log("GAME OVER");
-                    uI.gameOver.enabled = true;
+                    GameOver();
                 }
             }
             else if (collision.gameObject.tag == "power")
             {
                 Debug.Log("Triggered " + collision.gameObject.name);
                 slotColour.ChangeSlotColour();
-                if (controll.speedOverall >= spawn.speed)
-                {
-                    controll.updateSpeed -= controll.slowDown;
-                    uI.speedText.text = "Speed " + controll.speedOverall.ToString();
-                    if (controll.speedOverall < spawn.speed)
-                    {
-                        controll.updateSpeed = controll.startSpeed;
-                    }
-                }
+                // if (controll.speedOverall >= spawn.speed)
+                // {
+                //     // controll.updateSpeed -= controll.slowDown;
+                //     // uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+                //     // if (controll.speedOverall < spawn.speed)
+                //     // {
+                //     //     controll.updateSpeed = controll.startSpeed;
+                //     // }
+                // }
                 
 
                 Destroy(collision.gameObject);
@@ -238,8 +229,8 @@ public class Player : MonoBehaviour
             gameMaster.score += gameMaster.bonus;
             Debug.Log("Bonus Score " + gameMaster.bonus + " added");
             gameMaster.bonusMultiplier++; // Add 1 to multi 
-            uI.multiText.text = "Muti: x" + gameMaster.bonusMultiplier.ToString(); // UI Update
-            uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+            uI.multiText.text = "Muti: x" + gameMaster.bonusMultiplier; // UI Update
+            uI.scoreText.text = "Score: " + gameMaster.score;
             
             // Reset gates 
             isGreen = false;
@@ -253,9 +244,17 @@ public class Player : MonoBehaviour
             
             // Speed Up
             controll.updateSpeed += controll.bigBoostSpeed;
-            uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+            uI.speedText.text = "Speed " + controll.speedOverall;
             Debug.Log("BIG Boost added, new speed: " + controll.updateSpeed);
             spawn.speed--;
+            if (spawn.speed <= 0)
+            {
+                spawn.speed = 1;
+            }
+            
+            // More Time
+            timer.timeRemaining += 20;
+            timer.timeAdd += 2;
         }
     }
 
@@ -264,10 +263,11 @@ public class Player : MonoBehaviour
     {
         slotColour.ChangeSlotColour();
         controll.updateSpeed += controll.boostSpeed; // Increase speed
-        uI.speedText.text = "Speed " + controll.speedOverall.ToString();
+        uI.speedText.text = "Speed " + controll.speedOverall;
         Debug.Log("Small boost added, new speed: " + controll.updateSpeed);
         gameMaster.score += 1 * gameMaster.bonusMultiplier; // +1 x Multi
-        uI.scoreText.text = "Score: " + gameMaster.score.ToString();
+        uI.scoreText.text = "Score: " + gameMaster.score;
+        timer.timeRemaining += timer.timeAdd;
 
         // Win condition
         if (gameMaster.score >= 1000)
@@ -277,6 +277,13 @@ public class Player : MonoBehaviour
             isAlive = false;
         }
     }
-    
+
+    public void GameOver()
+    {
+        isAlive = false;
+        Destroy(myGameObject);
+        Debug.Log("GAME OVER");
+        uI.gameOver.enabled = true;
+    }
     
 }

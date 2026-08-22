@@ -6,13 +6,17 @@ public class UI : MonoBehaviour
 {
     public GameMaster gameMaster;
     public GateControll controll;
+    public Timer timer;
     
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiText;
+    
     public TextMeshProUGUI winnerText;
     public TextMeshProUGUI gameOver;
     
     public TextMeshProUGUI speedText;
+    
+    public TextMeshProUGUI timeRemainingText;
     
     public Image greenImage;
     public Image redImage;
@@ -32,6 +36,6 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timeRemainingText.text = timer.timeRemaining.ToString("00.00");
     }
 }

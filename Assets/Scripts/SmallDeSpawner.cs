@@ -15,6 +15,8 @@ public class SmallDeSpawner : MonoBehaviour
     public Player player;
 
     public GameObject power;
+
+    public SpawnGroup speedUpdate;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +49,7 @@ public class SmallDeSpawner : MonoBehaviour
         while (player.isAlive)
         {
             moveSmallBoy();
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(speedUpdate.speed);
         }
         
     }
